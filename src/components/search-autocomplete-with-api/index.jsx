@@ -56,14 +56,17 @@ const SearchAutocompleteWithApi = () => {
 
     return (
         <div className={"search-autocomplete-container"}>
-            <input
-                name="search-users"
-                type="text"
-                placeholder="Search Users here..."
-                value={searchParam}
-                onChange={handleChange}
-            />
-
+            {loading ? (
+                <h1>Loading Data ! Please wait</h1>
+            ) : (
+                <input
+                    name="search-users"
+                    type="text"
+                    placeholder="Search Users here..."
+                    value={searchParam}
+                    onChange={handleChange}
+                />)
+            }
             {showSuggestions && <Suggestions handleClick={handleClick} data={filteredUsers} />}
         </div>
     );
