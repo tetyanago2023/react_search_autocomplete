@@ -15,7 +15,7 @@ const SearchAutocompleteWithApi = () => {
         if (e.target.value.length > 1) {
             const filteredData =
                 users && users.length
-                    ? users.filter((item) => item.toLowerCase().indexOf(query) > -1)
+                    ? users.filter((item) => item.toLowerCase().includes(query))
                     : [];
             setFilteredUsers(filteredData);
             setShowSuggestions(true);
@@ -41,11 +41,12 @@ const SearchAutocompleteWithApi = () => {
                 setLoading(false);
                 setError(null);
             }
-            } catch (error) {
-              setLoading(false);
-              console.log(error);
-              setError(error);
-            }
+        } catch (error) {
+            console.error(error);
+            setError(error);
+        } finally {
+            setLoading(false);
+        }
     }
 
     useEffect(() => {
